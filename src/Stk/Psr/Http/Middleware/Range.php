@@ -48,8 +48,8 @@ class Range
         $r = null;
         if (preg_match('/items=(\d+)-(\d+)/', $range, $matches)) {
             $r        = new stdClass();
-            $r->start = $matches[1];
-            $r->stop  = $matches[2];
+            $r->start = (int)$matches[1];
+            $r->stop  = (int)$matches[2];
         }
 
         return $request->withAttribute('range', $r);
