@@ -1,6 +1,7 @@
 {
   "name": "mbretter/stk-psr-http",
-  "description": "PSR HTTP additions",
+  "description": "Stk PSR HTTP additions",
+  "keywords": ["stk","psr http"],
   "type": "library",
   "license": "BSD-3-Clause",
   "authors": [
