@@ -4,6 +4,7 @@ namespace Stk\Psr\Http\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use stdClass;
 
@@ -11,7 +12,7 @@ use stdClass;
  * catches Range header from the request
  * parse and set an attribute with start and stop value
  */
-class Range
+class Range implements MiddlewareInterface
 {
     /**
      * @param ServerRequestInterface $request
