@@ -1,8 +1,7 @@
 language: php
 
 php:
-  - 7.2
-  - 7.3
+  - 7.4
   
 install:
   # Install composer packages
@@ -29,7 +28,7 @@ after_success:
  
  # Tell Travis CI to monitor only 'master' branch
 branches:
-  only: master
+  only: [master]
 
 # You can delete the cache using travis-ci web interface
 cache:
