@@ -9,6 +9,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Stk\Psr\Http\Middleware\AcceptLanguage;
+use Stk\Service\AcceptLanguageInterface;
 use Zend\Diactoros\ServerRequestFactory;
 
 class AcceptLanguageTest extends TestCase
@@ -120,10 +121,43 @@ class AcceptLanguageTest extends TestCase
         ], $languages);
     }
 
+    public function testWithService()
+    {
+        $service = new AcceptLanguageService();
+
+        $middleware = new AcceptLanguage($service);
+        $middleware->process($this->request, $this->requestHandler);
+        $this->assertEquals('fr-CH', $service->language);
+        $this->assertEquals([
+            ['fr-CH', 1],
+            ['fr', 0.9],
+            ['en', 0.8],
+            ['de', 0.7],
+            ['*', 0.5],
+        ], $service->languages);
+    }
+
     public function testInvokeWithoutNext()
     {
         $resp = $this->middleware->__invoke($this->request, $this->response, null);
         $this->assertSame($resp, $this->response);
     }
 
+}
+
+class AcceptLanguageService implements AcceptLanguageInterface
+{
+    public ?string $language = null;
+
+    public array $languages = [];
+
+    public function setAcceptLanguage(string $language = null)
+    {
+        $this->language = $language;
+    }
+
+    public function setAcceptLanguages(array $languages = [])
+    {
+        $this->languages = $languages;
+    }
 }

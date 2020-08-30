@@ -6,7 +6,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use stdClass;
+use Stk\Service\AcceptLanguageInterface;
 
 /**
  * catches Accept-Language header from the request
@@ -14,6 +14,13 @@ use stdClass;
  */
 class AcceptLanguage implements MiddlewareInterface
 {
+    protected ?AcceptLanguageInterface $service = null;
+
+    public function __construct(AcceptLanguageInterface $service = null)
+    {
+        $this->service = $service;
+    }
+
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
@@ -65,6 +72,11 @@ class AcceptLanguage implements MiddlewareInterface
                 uasort($languages, fn($a, $b) => $a[0] <=> $a[1]);
                 $language = $languages[0][0];
             }
+        }
+
+        if ($this->service !== null) {
+            $this->service->setAcceptLanguage($language);
+            $this->service->setAcceptLanguages($languages);
         }
 
         return $request->withAttribute('language', $language)->withAttribute('languages', $languages);
