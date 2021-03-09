@@ -28,9 +28,9 @@ class AcceptLanguage implements MiddlewareInterface
      *
      * @return ResponseInterface
      */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $next): ResponseInterface
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null): ResponseInterface
     {
-        if (!$next) {
+        if ($next === null) {
             return $response;
         }
 

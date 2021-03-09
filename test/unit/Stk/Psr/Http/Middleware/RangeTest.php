@@ -2,6 +2,7 @@
 
 namespace StkTest\Psr\Http\Middleware;
 
+use Laminas\Diactoros\ServerRequestFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -10,7 +11,6 @@ use Psr\Http\Message\StreamInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use stdClass;
 use Stk\Psr\Http\Middleware\Range;
-use Zend\Diactoros\ServerRequestFactory;
 
 class RangeTest extends TestCase
 {

@@ -11,17 +11,19 @@
     }
   ],
   "require": {
-    "php": "^7.4",
+    "php": "^7.4|^8.0",
     "ext-json": "*",
     "psr/http-message": "^1.0",
     "psr/http-server-middleware": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8",
-    "friendsofphp/php-cs-fixer": "^2.14",
-    "zendframework/zend-diactoros": "^2.1"
+    "phpunit/phpunit": "^9",
+    "laminas/laminas-diactoros": "2.5.0",
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "phpstan/phpstan": "^0.12.81"
   },
   "scripts": {
+    "analyse": "phpstan analyse",
     "test-unit": "phpunit -v --testsuite=\"unit tests\" --testdox --bootstrap test/unit/bootstrap.php",
     "test-reports": "phpunit --testsuite=\"unit tests\" --bootstrap test/unit/bootstrap.php --coverage-html reports/coverage --coverage-clover reports/clover.xml --coverage-crap4j reports/crap4j.xml --log-junit reports/junit.xml",
     "cs-check": "php-cs-fixer fix -v --dry-run --using-cache=no src",

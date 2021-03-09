@@ -2,6 +2,7 @@
 
 namespace StkTest\Psr\Http\Middleware;
 
+use Laminas\Diactoros\ServerRequestFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -9,7 +10,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Stk\Psr\Http\Middleware\JsonRest;
-use Zend\Diactoros\ServerRequestFactory;
 
 class JsonRestTest extends TestCase
 {
