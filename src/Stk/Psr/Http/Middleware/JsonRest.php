@@ -40,6 +40,10 @@ class JsonRest implements MiddlewareInterface
 
     protected function handle(ResponseInterface $response): ResponseInterface
     {
+        if ($response->hasHeader('Content-Type')) {
+            return $response;
+        }
+
         return $response->withHeader('Content-Type', 'application/json')
             ->withHeader('Expires', 'Tue, 10 Jul 1997 01:00:00 GMT')
             ->withHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
