@@ -49,7 +49,7 @@ class JsonRestTest extends TestCase
         $this->middleware = new JsonRest();
     }
 
-    public function testProcess()
+    public function testProcess(): void
     {
         $this->response->expects($this->exactly(4))->method('withHeader')->withConsecutive(
             ['Content-Type', 'application/json'],
@@ -60,7 +60,14 @@ class JsonRestTest extends TestCase
         $this->middleware->process($this->request, $this->requestHandler);
     }
 
-    public function testInvoke()
+    public function testProcessWithHeaeerPresent(): void
+    {
+        $this->response->method('hasHeader')->with('Content-Type')->willReturn(true);
+        $this->response->expects($this->never())->method('withHeader')->willReturn($this->response);
+        $this->middleware->process($this->request, $this->requestHandler);
+    }
+
+    public function testInvoke(): void
     {
         $this->response->expects($this->exactly(4))->method('withHeader')->withConsecutive(
             ['Content-Type', 'application/json'],
@@ -73,7 +80,7 @@ class JsonRestTest extends TestCase
         });
     }
 
-    public function testInvokeWithoutNext()
+    public function testInvokeWithoutNext(): void
     {
         $resp = $this->middleware->__invoke($this->request, $this->response, null);
         $this->assertSame($resp, $this->response);
