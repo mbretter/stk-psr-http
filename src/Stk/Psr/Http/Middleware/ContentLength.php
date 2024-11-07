@@ -42,7 +42,7 @@ class ContentLength implements MiddlewareInterface
     {
         $length = $response->getBody()->getSize();
         if ($length !== null && !$response->hasHeader('Content-Length')) {
-            return $response->withHeader('Content-Length', $length);
+            return $response->withHeader('Content-Length', (string) $length);
         }
 
         return $response;

@@ -60,7 +60,7 @@ class AcceptLanguage implements MiddlewareInterface
                 $lq    = explode(';', $langQuality, 2);
                 $lq[0] = trim($lq[0]);
                 if (count($lq) === 1) {
-                    $lq[1] = 1;
+                    $lq[1] = 1.0;
                 } else {
                     $lq[1] = (float) substr($lq[1], strpos($lq[1], '=') + 1);
                 }
@@ -69,7 +69,8 @@ class AcceptLanguage implements MiddlewareInterface
             }
 
             if (count($languages) > 0) {
-                uasort($languages, fn($a, $b) => $a[0] <=> $a[1]);
+                uasort($languages, fn($a, $b) => $b[1] <=> $a[1]);
+                $languages = array_values($languages);
                 $language = $languages[0][0];
             }
         }
@@ -81,4 +82,5 @@ class AcceptLanguage implements MiddlewareInterface
 
         return $request->withAttribute('language', $language)->withAttribute('languages', $languages);
     }
+
 }

@@ -20,7 +20,7 @@ class Json
             $response = $response->withHeader('Content-Range', "items 0-0/0");
         }
 
-        $response->getBody()->write(json_encode($data));
+        $response->getBody()->write(json_encode($data) ?: '');
 
         return $response->withHeader('Content-Type', 'application/json')
             ->withHeader('Expires', 'Tue, 10 Jul 1997 01:00:00 GMT')

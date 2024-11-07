@@ -40,7 +40,7 @@ class AcceptLanguageTest extends TestCase
         $this->request = ServerRequestFactory::fromGlobals([
             'REMOTE_ADDR'          => '192.168.200.5',
             'HTTP_HOST'            => 'foo.com',
-            'HTTP_ACCEPT_LANGUAGE' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5'
+            'HTTP_ACCEPT_LANGUAGE' => 'fr-CH, en;q=0.8, fr;q=0.9, de;q=0.7, *;q=0.5'
         ]);
 
         $this->body = $this->createMock(StreamInterface::class);
@@ -151,12 +151,12 @@ class AcceptLanguageService implements AcceptLanguageInterface
 
     public array $languages = [];
 
-    public function setAcceptLanguage(string $language = null)
+    public function setAcceptLanguage(string $language = null): void
     {
         $this->language = $language;
     }
 
-    public function setAcceptLanguages(array $languages = [])
+    public function setAcceptLanguages(array $languages = []): void
     {
         $this->languages = $languages;
     }
